@@ -28,13 +28,14 @@ public class CSVReader {
     }
 
     private static Employee createEmployee(String[] metadata) {
-        String fullName = metadata[0];
-        int age = Integer.parseInt(metadata[1].trim());
-        int idEmployee = Integer.parseInt(metadata[2].trim());
-        String position = metadata[3].trim();
-        String address = metadata[4].trim();
-        String phoneNumber = metadata[5].trim();
-        String email = metadata[6].trim();
-        return new Employee(fullName, age, idEmployee, position, address, phoneNumber, email);
+        int id = Integer.parseInt(metadata[0].trim());
+        String fullName = metadata[1].trim();
+        int age = Integer.parseInt(metadata[2].trim());
+        int idEmployee = Integer.parseInt(metadata[3].trim());
+        String position = metadata[4].trim();
+        String address = metadata[5].trim();
+        String phoneNumber = metadata[6].trim();
+        String email = metadata[7].trim();
+        return new Employee(id,fullName, age, idEmployee, position, address, phoneNumber, email);
     }
 }
