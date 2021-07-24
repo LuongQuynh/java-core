@@ -1,4 +1,4 @@
-package com.onemount.compareTwoFiles;
+package com.onemount.compare;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -31,7 +31,7 @@ public class CSVReader {
         int id = Integer.parseInt(metadata[0].trim());
         String fullName = metadata[1].trim();
         int age = Integer.parseInt(metadata[2].trim());
-        int idEmployee = Integer.parseInt(metadata[3].trim());
+        String idEmployee = metadata[3].trim();
         String position = metadata[4].trim();
         String address = metadata[5].trim();
         String phoneNumber = metadata[6].trim();

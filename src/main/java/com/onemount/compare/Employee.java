@@ -1,15 +1,15 @@
-package com.onemount.compareTwoFiles;
+package com.onemount.compare;
 
 public class Employee implements Comparable<Employee> {
     private int id;
     private String fullName;
     private int age;
-    private int idEmployee;
+    private String idEmployee;
     private String position;
     private String address;
     private String phoneNumber;
     private String email;
-    public Employee(int id, String fullName, int age, int idEmployee, String position, String address, String phoneNumber, String email) {
+    public Employee(int id, String fullName, int age, String idEmployee, String position, String address, String phoneNumber, String email) {
         this.id = id;
         this.fullName = fullName;
         this.age = age;
@@ -22,6 +22,10 @@ public class Employee implements Comparable<Employee> {
 
     public int getId() {
         return id;
+    }
+
+    public String getIdEmployee() {
+        return idEmployee;
     }
 
     public boolean compareTwoEmployees(Employee employee) {

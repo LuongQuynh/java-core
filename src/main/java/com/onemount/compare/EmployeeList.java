@@ -1,4 +1,4 @@
-package com.onemount.compareTwoFiles;
+package com.onemount.compare;
 
 import java.util.*;
 
