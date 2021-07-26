@@ -32,7 +32,7 @@ public class Employee implements Comparable<Employee> {
         return this.id == employee.id
                 && this.fullName.equals(employee.fullName)
                 && this.age == employee.age
-                && this.idEmployee == employee.idEmployee
+                && this.idEmployee.equals(employee.idEmployee)
                 && this.position.equals(employee.position)
                 && this.address.equals(employee.address)
                 && this.phoneNumber.equals(employee.phoneNumber)

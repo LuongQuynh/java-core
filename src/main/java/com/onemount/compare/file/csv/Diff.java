@@ -1,7 +1,6 @@
-package com.onemount.compare.file;
+package com.onemount.compare.file.csv;
 
 import com.onemount.compare.Employee;
-import com.onemount.compare.file.model.Result;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,14 +9,15 @@ import java.util.List;
 public class Diff {
     private List<String> listA;
     private List<String> listB;
+    private static List<String> listResult;
 
     public Diff(String file1, String file2) {
-        listA = extracted(file1);
-        listB = extracted(file2);
+        listA = readFile(file1);
+        listB = readFile(file2);
 
     }
 
-    private List<String> extracted(String fileName) {
+    private List<String> readFile(String fileName) {
         List<String> lines = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -36,50 +36,33 @@ public class Diff {
     public File withFormat(Class<Employee> employeeClass) {
         List<Employee> employeesA = getEmployee(listA);
         List<Employee> employeesB = getEmployee(listB);
-        String result = compare(employeesA, employeesB);
+        List<String> result = compareTwoList(employeesA, employeesB);
         File file = writeToFile(result);
         return file;
 
 
     }
 
-    private File writeToFile(String result) {
-        File file = new File("result.csv");
-        FileWriter fw = null;
-        try {
-            fw = new FileWriter(file);
-            fw.write(result);
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return file;
-    }
 
-    private String compare(List<Employee> listA, List<Employee> listB) {
-        // muon 2 cai list
-        // so sanh
-        // lay kich thuoc 2 ds a,b
-        // so sanh tung object trong ds
-        // lay mnv cua row trong ds 1 so sanh vs tat ca cac rows trong b
-        String ketqua="hello";
+    private List<String> compareTwoList(List<Employee> listA, List<Employee> listB) {
+        List<String> diffList = new ArrayList<>();
+        String ketQua = "hello";
         for (Employee e1 : listA) {
             for (Employee e2 : listB) {
-                ketqua= compareTwoEmployee(e2,e1);
+                ketQua = compareTwoEmployee(e2, e1);
+                if (!ketQua.isEmpty()) {
+                    diffList.add(ketQua);
+                }
             }
         }
-        return ketqua;
+        return diffList;
 
     }
 
-    private String compareTwoEmployee(Employee e2, Employee e1) {
-        String ketQua = "These are the same";
-//        System.out.println(e1.getIdEmployee());
-//        System.out.println(e2.getIdEmployee());
-
-        if (e2.getIdEmployee().equals(e1.getIdEmployee())){
-            System.out.println("I'm here");
-            if (!e2.compareTwoEmployees(e1)){
+    private String compareTwoEmployee(Employee e1, Employee e2) {
+        String ketQua = "";
+        if (e1.getIdEmployee().equals(e2.getIdEmployee())) {
+            if (!e1.compareTwoEmployees(e2)) {
                 ketQua = e1.toString() + "\n" + e2.toString() + "\n-------------";
             }
         }
@@ -87,20 +70,33 @@ public class Diff {
 
     }
 
-
-    private List<Employee> getEmployee(List<String> rows) {
-        List<Employee> employeesA = new ArrayList<>();
-        for (String row : rows) {
-            String[] columns = row.split(",");
-            Employee employee = creatEmployee(columns);
-//            System.out.println(employee);
-            employeesA.add(employee);
-
+    private File writeToFile(List<String> result) {
+        File mFile = new File("resources/writer.csv");
+        try {
+            FileWriter fw = new FileWriter(mFile);
+            for (String str : result) {
+                fw.write(str + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return employeesA;
+        return mFile;
     }
 
-    private Employee creatEmployee(String[] metadata) {
+
+    private List<Employee> getEmployee(List<String> rows) {
+        List<Employee> employees = new ArrayList<>();
+        for (String row : rows) {
+            String[] columns = row.split(",");
+            Employee employee = createEmployee(columns);
+            employees.add(employee);
+
+        }
+        return employees;
+    }
+
+    private Employee createEmployee(String[] metadata) {
         int id = Integer.parseInt(metadata[0].trim());
         String fullName = metadata[1].trim();
         int age = Integer.parseInt(metadata[2].trim());

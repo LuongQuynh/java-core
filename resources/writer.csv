@@ -1,0 +1,6 @@
+Employee{id=4, fullName='Đỗ Thị E', age=26, idEmployee=6000104, position='PO', address='Ha Noi', phoneNumber='123456789', email='hoa@gmail.com'}
+Employee{id=4, fullName='Đỗ Thị E', age=24, idEmployee=6000104, position='PO', address='Ha Noi', phoneNumber='123456789', email='hoa@gmail.com'}
+-------------
+Employee{id=5, fullName='Đỗ Thị F', age=25, idEmployee=6000105, position='PO', address='Ha Noi', phoneNumber='123456789', email='hoa@gmail.com'}
+Employee{id=5, fullName='Đỗ Thị F', age=30, idEmployee=6000105, position='PO', address='Ha Noi', phoneNumber='123456789', email='hoa@gmail.com'}
+-------------
